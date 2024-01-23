@@ -178,7 +178,7 @@ Class TransferData{
      }
 
      public function sendLineNotify($err){
-        $sToken    = Setting::$l_token;
+        $sToken    = MySecret::$l_token;
          if($err == 0){
             $sMessage  = " เช็คข้อมูลสำเร็จ\n";
             $sMessage .= "ไม่มีข้อมูลใหม่ในวันนี้";
