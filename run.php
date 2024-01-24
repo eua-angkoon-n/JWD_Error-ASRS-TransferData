@@ -96,6 +96,7 @@ Class TransferData{
             
              foreach($row as $k=>$v){
                 $v = [
+                    'id' => $v['id'],
                     'wh' => IsNullOrEmptyString($v['wh']) ? '' : $v['wh'],
                     'tran_date_time' => $v['tran_date_time'],
                     'Control_WCS' => IsNullOrEmptyString($v['Control WCS']) ? '' : $v['Control WCS'],
