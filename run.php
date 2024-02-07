@@ -25,14 +25,14 @@ class TransferData
         $lastId = $this->getLastIDInEbook();
         $row = $this->getNewDataFromJai($lastId);
         // return $row;
-        if (!$row) {
-            $this->sendLineNotify(0, 0);
-            return 0;
-        }
+        // if (!$row) {
+            // $this->sendLineNotify(0, 0);
+            // return 0;
+        // }
         $s = $this->insertNewDataToEbook($row);
         $f = $this->getLastModificationTimesByUniqueName();
-        if (date('w') != 0 && date('w') != 6)
-            $this->sendLineNotify($s, $f);
+        // if (date('w') != 0 && date('w') != 6)
+            // $this->sendLineNotify($s, $f);
         return $s;
     }
 
