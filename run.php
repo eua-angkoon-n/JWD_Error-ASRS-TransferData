@@ -8,6 +8,7 @@ header('Content-Type: text/html; charset=utf-8');
 
 require_once __DIR__ . "/config/connectDB.php";
 require_once __DIR__ . "/config/setting.php";
+require_once __DIR__ . "/config/mysecret.php";
 require_once __DIR__ . "/tools/crud.tool.php";
 require_once __DIR__ . "/tools/function.tool.php";
 
@@ -25,10 +26,10 @@ class TransferData
         $lastId = $this->getLastIDInEbook();
         $row = $this->getNewDataFromJai($lastId);
         // return $row;
-        // if (!$row) {
+        if (!$row) {
             // $this->sendLineNotify(0, 0);
-            // return 0;
-        // }
+            return 0;
+        }
         $s = $this->insertNewDataToEbook($row);
         $f = $this->getLastModificationTimesByUniqueName();
         // if (date('w') != 0 && date('w') != 6)
@@ -90,6 +91,8 @@ class TransferData
 
     public function insertNewDataToEbook($row)
     {
+        if(empty($row))
+            return false;
 
         try {
             $con = connect_database('ebooking');
@@ -185,7 +188,7 @@ class TransferData
 
     public function getLastModificationTimesByUniqueName()
     {
-        $folderPath = __DIR__ . "/" . Setting::$ErrorFilePath;
+        $folderPath = __DIR__ . "/" . MySecret::$ErrorFilePath;
         $result = [];
         $this->readAllFilesByUniqueName($folderPath, $result);
         $r = $this->InsertToDB($result);
